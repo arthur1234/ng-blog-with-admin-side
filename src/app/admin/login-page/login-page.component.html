@@ -1,5 +1,15 @@
 <form class="card" action="" [formGroup]="form" (ngSubmit)="submit()">
     <h2>Enter to admin panel</h2>
+
+    <div class="alert alert-danger"
+        *ngIf="auth.error$ | async as error"
+    >{{error}}</div>
+
+    <div class="alert info"
+         *ngIf="message"
+    >{{message}}</div>
+
+
     <div
             [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
             class="form-control"
@@ -44,6 +54,6 @@
     <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="form.invalid"
+            [disabled]="form.invalid || submited"
     >Enter</button>
 </form>
