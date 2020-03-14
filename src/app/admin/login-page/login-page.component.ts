@@ -13,13 +13,14 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
-  submited = false;
+  submitted = false;
   message: string;
 
   constructor(
      public auth: AuthService,
      private router: Router,
      private route: ActivatedRoute
+
   ) { }
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.submited = true;
+    this.submitted = true;
 
     const user: User = {
         email: this.form.value.email,
@@ -56,9 +57,9 @@ export class LoginPageComponent implements OnInit {
     this.auth.login(user).subscribe(() => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
-        this.submited = false;
+        this.submitted = false;
     }, () => {
-        this.submited = false;
+        this.submitted = false;
     });
   }
 }
